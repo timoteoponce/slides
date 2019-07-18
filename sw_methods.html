@@ -1,0 +1,1246 @@
+<!doctype html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Software development methodologies">
+    <meta name="author" content="Timoteo Ponce">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Software components implementation</title>
+
+    <link rel="stylesheet" href="./reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="./reveal.js/css/theme/night.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="./reveal.js/lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement('link');
+link.rel = 'stylesheet';
+link.type = 'text/css';
+link.href = window.location.search.match(/print-pdf/gi) ? './reveal.js/css/print/pdf.css' : './reveal.js/css/print/paper.css';
+document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <style>
+      .twocolumn {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 30px;
+        text-align: left;
+      }
+      .threecolumn {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 20px;
+        text-align: center;
+      }
+
+      .centered {
+        position: relative;
+        top: 90%;
+        transform: translateY(-50%);
+      }
+      .text-dark > *, .text-dark > h1,.text-dark > h2,.text-dark > h3,.text-dark > h4{
+        color: #4c5760;
+      }
+
+      .reveal.reveal img{
+        border: none;
+        box-shadow: none;
+        max-height: calc(66vh);
+        max-width: calc(66vw);
+      }
+      .leftcolumn{
+        position: absolute;
+        z-index: -1;
+        /*background-color: rgb(20, 98, 135);*/
+        background-color: #b2543d;
+        left: -50%;
+        top: -100%;
+        height: 500%;
+        width: 100%;
+      }
+      .rightcolumn{
+        position: absolute;
+        z-index: -1;
+        background-color: #e5deca;
+        right: -50%;
+        top: -100%;
+        height: 500%;
+        width: 100%;
+      }
+      .color-beige {
+        background-color: #e5deca;
+      }
+      .copyright {
+        color: #e5deca;
+        font-family: 'Open Sans', sans-serif;
+        position: absolute;
+        left: 10px;
+        bottom: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="copyright">
+      &#169; Timoteo Ponce
+    </div>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h2>Software development methodologies</h2>
+          <p>
+            <small>Created by <a href="http://timoponce.blogspot.com">Timoteo Ponce</a></small>
+          </p>
+        </section>
+        <section>
+          <section>
+            <h1>Course remarks</h1>
+          </section>
+          <section>
+            <h2>Classes</h2>
+            <p class="fragment">Online course</p>
+            <p class="fragment">Weekly progress</p>
+            <p class="fragment">Once uploaded, watch it many times</p>
+          </section>
+          <section>
+            <h2>Assignments</h2>
+            <p class="fragment">Assignments per week</p>
+            <p class="fragment">Writing (English) will be required</p>
+            <p class="fragment">Weekly remote-hangout</p>
+            <p class="fragment">Final project</p>
+          </section>
+          <section>
+            <h2>Marks</h2>
+            <p class="fragment">Class development</p>
+            <p class="fragment">Assignments</p>
+            <p class="fragment">Final project (no exams!!)</p>
+          </section>
+        </section>
+        <section>
+
+          <section>
+            <h2>Fundamentals</h2>
+          </section>
+
+          <section>
+            <blockquote>
+              If you want to go fast, go alone ...
+            </blockquote>
+            <blockquote>
+              If you want to go far, go together
+            </blockquote>
+            <small> - African Proverb</small>
+          </section>
+
+          <section data-background-video="resources/problem_solving_spa_fixed.mp4" type="video/mp4">
+          </section>
+
+          <section>
+            <h3>To the moon</h3>
+            <div class="twocolumn">
+              <ul>
+                <li class="fragment">410'000 people</li>
+                <li class="fragment">Asynchronous parallel projects</li>
+                <li class="fragment">Orders of magnitude science progress</li>
+              </ul>
+              <img class="fragment" src="images/failure_not_an_option.jpg" alt="" />
+
+            </div>
+          </section>
+
+          <section>
+            <p>How do we build Software?</p>
+            <img src="images/golden_gate.jpg" alt="" />
+          </section>
+
+          <section>
+            <h3>Reality</h3>
+            <p class="fragment">Chaotic</p>
+            <p class="fragment">Code and fix</p>
+            <p class="fragment">No planning</p>
+            <p class="fragment">Short term decisions</p>
+            <p class="fragment"><strong>Not scalable</strong></p>
+          </section>
+
+          <section>
+            <h3>Types of programs</h3>
+            <img src="images/program_types.jpg" alt=""/>
+          </section>
+
+          <section>
+            <h3>What managers need</h3>
+            <p class="fragment">Conventions</p>
+            <p class="fragment">Procedures</p>
+            <p class="fragment">Policies</p>
+            <p class="fragment"><strong>Define a repeatable process</strong></p>
+          </section>
+
+          <section>
+            <h3>What they need is a methodology</h3>
+            <div class="fragment">
+              <div class="twocolumn">
+                <div class="fragment">
+                  <h4>Method</h4>
+                  <p>Systematic/repeatable procedure, similar to a technique</p>
+                </div>
+                <div class="fragment">
+                  <h4>Methodology</h4>
+                  <p>Any conventions and policies the team relies on to successfully deliver systems</p>
+                </div>
+              </div>
+              <small class="fragment">(Cockburn, 2003)</small>
+            </div>
+          </section>
+
+          <section>
+            <h3>Methodologies</h3>
+            <p class="fragment">Engineering methodologies
+              <ul class="fragment">
+                <li>Bureaucratic</li>
+                <li>Resist to change</li>
+                <li>Focus on planning</li>
+                <li>Process oriented</li>
+              </ul>
+            </p>
+          </section>
+          <section>
+            <h3>Methodologies</h3>
+            <p class="fragment">Agile methodologies
+              <ul class="fragment">
+                <li>Just enough process</li>
+                <li>Welcome to change</li>
+                <li>Focus on reflection and adaptation</li>
+                <li>People oriented</li>
+              </ul>
+            </p>
+          </section>
+
+          <section>
+            <h3>Summary</h3>
+            <ul>
+              <li class="fragment">Methodologies come from an management's perspective</li>
+              <li class="fragment">Civil engineering wrongly taken as basis</li>
+              <li class="fragment">Software engineering methodologies have little success</li>
+              <li class="fragment">Agile methodologies as alternative</li>
+            </ul>
+          </section>
+
+        </section>
+
+        <section>
+          <section>
+            <h2>Software methodologies</h2>
+            <h3>an empirical observation</h3>
+          </section>
+
+          <section>
+            <blockquote class="fragment">
+              What gets us into trouble is not what we don't know ...
+            </blockquote>
+            <blockquote class="fragment">
+              It's what we know for sure that just ain't so
+            </blockquote>
+            <small class="fragment"> - Mark Twain</small>
+
+          </section>
+
+          <section>
+            <p>We've talked a bit about software development, processes, methods, methodologies and people interactions</p>
+            <p class="fragment"><strong>But from where we draw these conclusions?</strong></p>
+          </section>
+
+          <section>
+            <img src="images/alistaircockburn.jpg" alt="" />
+            <p class="fragment">Alistair Cockburn</p>
+          </section>
+
+          <section>
+            <h3>Background</h3>
+            <ul class="fragment">
+              <li>IBM research lab, 2003</li>
+              <li>10 years doctoral research</li>
+              <li>Real projects, different companies</li>
+              <li>Interviewing managers and software builders</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Research - questions</h3>
+            <p class="fragment">Do we need yet another software methodology, or can we expected a
+              convergence?</p>
+            <p class="fragment">If convergence, what must be the characteristics?</p>
+            <p class="fragment">If no convergence, how can project teams deal with new methodologies?</p>
+            <p class="fragment">How does the methodology relate to the people on the project?</p>
+          </section>
+
+          <section>
+            <h3>Research - results</h3>
+            <ul>
+              <li class="fragment">A methodology is a formula describing conventions of interactions between roles</li>
+              <li class="fragment">People's personal characteristics place a limit on the effect of methodologies in general</li>
+              <li class="fragment">Every project requires a slightly different and flexible methodology</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Research - results</h3>
+            Identified cycle of behavior of successful projects:
+            <ul>
+              <li class="fragment">Project members define their interactions convention at the project's start</li>
+              <li class="fragment">Project members with the most success are the most adaptable</li>
+              <li class="fragment">They have periods of reflections in which they reconsider and adapt working conventions</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Software construction is inherently a creative process</h2>
+          </section>
+
+          <section>
+            <h3>Interpretation</h3>
+            <ul>
+              <li class="fragment">People, their roles and the interaction with other roles is fundamental for the success of a project</li>
+              <li class="fragment">Each project has to define it's own method of working, even if there are similarities</li>
+              <li class="fragment">Continuous interaction, fast feedback, reflection and adaptability are the norm in successful teams</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Scientific method</h3>
+            <div class="twocolumn">
+              <div class="fragment">
+                <ul>
+                  <li>Scientific method (384 BC)</li>
+                  <li>Empirical method for acquiring knowledge</li>
+                </ul>
+              </div>
+              <div class="fragment">
+                <img src="images/sci_method_1.jpg" alt="" />
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h3>Interpolation for software</h3>
+            <img src="images/sci_method_2.jpg" alt="" />
+          </section>
+
+          <section>
+            <h3>Summary</h3>
+            <ul>
+              <li>Software building is a creation process</li>
+              <li>Different projects, different methodologies</li>
+              <li>Creation processes and methodologies are a bad match</li>
+              <li>Knowledge acquiring methods work better</li>
+            </ul>
+          </section>
+
+          <section data-background-color="#336699">
+            <h2>Article - Self study</h2>
+            <ul>
+              <li>Ask the software methodology questions from Cockburn's research in your work environment</li>
+              <li>Gather the results and provide a summary on them</li>
+              <li>Write an article (personal blog, LinkedIn) in ENGLISH describing your findings</li>
+              <li>The article should contain at least 300 words</li>
+            </ul>
+          </section>
+
+        </section>
+        <section>
+          <section>
+            <h2>Engineering and Agile methodologies</h2>
+          </section>
+
+          <section>
+            <blockquote class="fragment">
+              You may be able to kick people to make them active, but not to make them creative, inventive, and thoughtful
+            </blockquote>
+            <small class="fragment">  -  Tom DeMarco</small>
+          </section>
+
+          <section>
+            <h3>Engineering and Agile</h3>
+            <ul>
+              <li class="fragment">Agile methods are adaptative rather than predictive</li>
+              <li class="fragment">Agile methods are people-oriented rather than process-oriented</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Predictive vs Adaptive</h2>
+          </section>
+
+          <section>
+            <h5>Separation of design and construction</h5>
+            Engineering disciplines rely on:
+            <ul>
+              <li>Planning before building</li>
+              <li>Ahead decisions</li>
+              <li>Predictable schedule and budget</li>
+            </ul>
+            <h4 class="fragment">Separate design from construction</h4>
+          </section>
+
+          <section data-background="images/road_construction.jpg">
+          </section>
+
+          <section>
+            <h5>Separation of design and construction</h5>
+            Agile disciplines rely on:
+            <ul>
+              <li>Creative process can't be planned</li>
+              <li>Software construction is free</li>
+              <li>Flexible scope for schedule and budget management</li>
+            </ul>
+            <h4 class="fragment">Design and construction are atomic</h4>
+          </section>
+
+          <section data-background="images/voting_machine.jpeg">
+
+          </section>
+
+          <section>
+            <h5>Unpredictable requirements</h5>
+            Common myths:
+            <ul>
+              <li>Changing requirements are due to bad req. gathering</li>
+              <li>Requirements should be stable</li>
+              <li>Estimations can be done from requirements</li>
+            </ul>
+            <p class="fragment"><strong>Proven to be wrong</strong></p>
+          </section>
+
+          <section>
+            <img src="images/folders_colored.jpg" alt="" />
+          </section>
+
+          <section>
+            <h5>Do predictable scenarios exist?</h5>
+            <p class="fragment">Yes</p>
+            <p class="fragment">e.g. aviation, laws, bureaucracy</p>
+            <p class="fragment">but such scenarios are not very common...</p>
+          </section>
+
+          <section>
+            <h5>Working on unpredictable scenarios</h5>
+            <p class="fragment">Use knowledge gathering</p>
+            <p class="fragment">combined with reflection</p>
+            <p class="fragment">and adaptation</p>
+          </section>
+
+          <section>
+            <img src="images/jef_and_ken.jpg" alt="" />
+            <small>Jeff Sutherland and Ken Schwaber</small>
+          </section>
+
+          <section>
+            <h5>Adaptive customer</h5>
+            <p class="fragment">Customer engages in the creation process</p>
+            <p class="fragment">Fixed scope instead of fixed price</p>
+            <p class="fragment">Requirements validation is a must</p>
+          </section>
+
+          <section>
+            <img src="images/meeting_customer.jpg" alt="" />
+          </section>
+
+          <section>
+            <h2>Putting people first</h2>
+          </section>
+
+          <section>
+            <h5>People as components</h5>
+            <ul>
+              <li>People is not replaceable, roles are</li>
+              <li>People is not interchangeable without side-effects</li>
+              <li>'Most adaptive' instead of 'most suitable'</li>
+            </ul>
+            <h4 class="fragment">By focusing on people, process gets improved</h4>
+          </section>
+
+          <section>
+            <img src="images/spolsky.png" alt="" />
+          </section>
+
+          <section>
+            <h5>People oriented process</h5>
+            <p class="fragment">Software development is an intellectual creative process</p>
+            <p class="fragment">Processes are accepted, not imposed</p>
+            <p class="fragment">Organization is defined, not imposed</p>
+          </section>
+
+          <section>
+            <img src="images/org_patterns_cover.jpg" alt="" />
+          </section>
+
+          <section>
+            <h5>The difficulty of measuring</h5>
+            <p class="fragment">Managers use measures</p>
+            <p class="fragment">Internal metrics are useless, external metrics are better</p>
+            <p class="fragment">We need adaptive managers as well</p>
+          </section>
+
+          <section>
+            <img src="images/potter_cover.webp" alt="" />
+          </section>
+
+          <section>
+            <h5>Business experts</h5>
+            <p class="fragment">Developers can't know everything</p>
+            <p class="fragment">Customers involved can also mean experts-involved</p>
+            <p class="fragment">Birth of the business analyst role</p>
+          </section>
+
+          <section data-background="images/capcom.jpg">
+          </section>
+
+          <section>
+            <h2>Self-Adaptive process</h2>
+          </section>
+
+          <section>
+            Facts
+            <p class="fragment">Processes change over time</p>
+            <p class="fragment">Adaptivity is a must</p>
+            <p class="fragment">Change is best done in time-boxes</p>
+            <p class="fragment">Regular review/reflect processes lead to adaptations</p>
+          </section>
+
+          <section data-background="images/reflect.jpg">
+          </section>
+
+          <section>
+            <h3>Summary</h3>
+            <ul>
+              <li>Adaptive processes are proven to be better</li>
+              <li>Adaptive processes require different behaviors (customer, management, organization)</li>
+              <li>People is central to the process</li>
+              <li>Internal measures are useless</li>
+            </ul>
+          </section>
+
+        </section>
+
+        <section>
+          <section>
+            <h2>Agile development</h2>
+          </section>
+
+          <section>
+            <blockquote class="fragment">
+              Doing half of something is, essentially, doing nothing
+            </blockquote>
+            <small class="fragment"> - Jeff Sutherland</small>
+          </section>
+
+          <section>
+            <div class="leftcolumn">
+            </div>
+            <div class="rightcolumn">
+            </div>
+            <div class="twocolumn">
+              <div class="centered">
+                <h2>Agile manifesto</h2>
+              </div>
+              <div class="centered text-dark">
+                <p class="fragment">Philosophy</p>
+                <p class="fragment">Outlines fundamental principles</p>
+                <p class="fragment">Created in 2001</p>
+              </div>
+            </div>
+          </section>
+
+          <section data-background-color="#363d32">
+            <h3>Individuals and interactions over processes and tools</h3>
+          </section>
+
+          <section data-background-color="#363d32">
+            <h3>Working software over comprehensive documentation</h3>
+          </section>
+
+          <section data-background-color="#363d32">
+            <h3>Customer collaboration over contract negotiation</h3>
+          </section>
+
+          <section data-background-color="#363d32">
+            <h3>Responding to change over following a plan</h3>
+          </section>
+
+          <section>
+            <h2>Flavours of Agile</h2>
+          </section>
+
+          <section>
+            <div class="leftcolumn">
+            </div>
+            <div class="rightcolumn">
+            </div>
+            <div class="twocolumn">
+              <div class="centered">
+                <h2>XP</h2>
+                Extreme Programming
+              </div>
+              <div class="centered text-dark">
+                <p class="fragment">Value-oriented methodology</p>
+                <p class="fragment">Emphasis on testing and collaboration</p>
+                <p class="fragment">Automation as first order tool</p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="leftcolumn">
+            </div>
+            <div class="rightcolumn">
+            </div>
+            <div class="twocolumn">
+              <div class="centered">
+                <h2>Scrum</h2>
+              </div>
+              <div class="centered text-dark">
+                <p class="fragment">Highly iterative framework</p>
+                <p class="fragment">Emphasis on inspection and adaptation</p>
+                <p class="fragment">Time-boxed approach</p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="leftcolumn">
+            </div>
+            <div class="rightcolumn">
+            </div>
+            <div class="twocolumn">
+              <div class="centered">
+                <h2>Crystal</h2>
+              </div>
+              <div class="centered text-dark">
+                <p class="fragment">Just-enough methodologies</p>
+                <p class="fragment">Emphasis on reflective improvement and frequent delivery</p>
+                <p class="fragment">Advocates for close communication</p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="leftcolumn">
+            </div>
+            <div class="rightcolumn">
+            </div>
+            <div class="twocolumn">
+              <div class="centered">
+                <h2>Unified process</h2>
+              </div>
+              <div class="centered text-dark">
+                <p class="fragment">Process framework</p>
+                <p class="fragment">Emphasis on use-cases and object orientation</p>
+                <p class="fragment">Uses modelling as design</p>
+              </div>
+            </div>
+          </section>
+
+          <section data-background-color="#336699">
+            <h2>Summary</h2>
+            <ul>
+              <li class="fragment">Agile manifesto</li>
+              <li class="fragment">Philosophy</li>
+              <li class="fragment">Brief description of approaches</li>
+            </ul>
+          </section>
+
+        </section>
+
+        <section>
+          <section>
+            <h2>Workshop: Marshmallow challenge</h2>
+          </section>
+        </section>
+
+        <!--
+        <section>
+          <section>
+            <h2>Framework foundations</h2>
+          </section>
+        </section>
+        -->
+
+        <section>
+          <section>
+            <h2>Scrum foundations</h2>
+          </section>
+
+          <section>
+            <div class="leftcolumn">
+            </div>
+            <div class="rightcolumn">
+            </div>
+            <div class="twocolumn">
+              <div class="centered fragment">
+                <h2>Agile</h2>
+                <p>is a philosophy</p>
+                <p>meant as guidance</p>
+              </div>
+              <div class="centered text-dark fragment">
+                <h2>Scrum</h2>
+                <p>is a framework</p>
+                <p>meant to be incomplete</p>
+              </div>
+            </div>
+          </section>
+
+          <!--
+          <section>
+            <h2>Roots</h2>
+            <div class="threecolumn">
+              <div class="fragment">
+                <h4>Empirical Process Control</h4>
+              </div>
+              <div class="fragment">
+                <h4>Toyota Production System</h4>
+              </div>
+              <div class="fragment">
+                <h4>Agile Manifesto</h4>
+              </div>
+            </div>
+          </section>
+          -->
+
+          <section>
+            <h4>Empiricism</h4>
+            <div class="fragment">
+              <blockquote>
+                Knowledge comes only, or primarily, from experience
+              </blockquote>
+              <small>  -  Merrian-Webster</small>
+            </div>
+          </section>
+
+          <section>
+            <div class="leftcolumn">
+            </div>
+            <div class="rightcolumn">
+            </div>
+            <div class="twocolumn">
+              <div class="centered fragment">
+                <h3>Empirically driven decisions</h3>
+                <p>Based on what has occurred</p>
+              </div>
+              <div class="centered text-dark fragment">
+                <h3>Lagging indicators</h3>
+                <p>Driven from historical metrics</p>
+              </div>
+            </div>
+          </section>
+
+          <section data-background-color="#b2543d">
+            <span><strong>Empiricism</strong> = Inspect + Adapt + Transparency</span>
+          </section>
+
+          <section>
+            <div class="leftcolumn">
+            </div>
+            <div class="rightcolumn">
+            </div>
+            <div class="twocolumn">
+              <div class="centered">
+                <h2>Inspect</h2>
+              </div>
+              <div class="centered text-dark fragment">
+                <p class="fragment">Inspect project and process</p>
+                <p class="fragment">Look for variances</p>
+                <p class="fragment">Strike the right balance</p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="leftcolumn">
+            </div>
+            <div class="rightcolumn">
+            </div>
+            <div class="twocolumn">
+              <div class="centered">
+                <h2>Adapt</h2>
+              </div>
+              <div class="centered text-dark fragment">
+                <p class="fragment">Reduce waste, increase value</p>
+                <p class="fragment">Introduce changes when needed</p>
+                <p class="fragment">Adapt the process to serve the project</p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="leftcolumn">
+            </div>
+            <div class="rightcolumn">
+            </div>
+            <div class="twocolumn">
+              <div class="centered">
+                <h3>Transparency</h3>
+              </div>
+              <div class="centered text-dark fragment">
+                <p class="fragment">Make your pace and progress visual</p>
+                <p class="fragment">Encourage openness across the team</p>
+                <p class="fragment">Share clear status across team boundaries</p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2>Scrum is a framework, not a process</h2>
+          </section>
+
+          <section>
+            <div class="leftcolumn">
+            </div>
+            <div class="rightcolumn">
+            </div>
+            <div class="twocolumn">
+              <div class="centered fragment">
+                <h3>Process</h3>
+                <p class="fragment">Step-by-step guidance</p>
+                <p class="fragment">Repeatable from project to project</p>
+              </div>
+              <div class="centered text-dark fragment">
+                <h3>Framework</h3>
+                <p class="fragment">Definition of key tasks and routines</p>
+                <p class="fragment">Non-descriptive</p>
+              </div>
+            </div>
+          </section>
+
+          <section data-background-color="#b2543d">
+            <h2>Your Scrum is not my Scrum</h2>
+          </section>
+
+          <section data-background-color="#869fa7">
+            Scrum <strong>will not</strong> solve your problems
+          </section>
+
+          <section>
+            <h2>Scrum in simple terms</h2>
+          </section>
+
+          <section data-background="images/po.jpg">
+            <h2>Roles - product owner</h2>
+          </section>
+
+          <section data-background="images/scrum_team.jpg">
+            <h2>Roles - development team</h2>
+          </section>
+
+          <section data-background="images/scrum_master.png">
+            <h2>Roles - scrum Master</h2>
+          </section>
+
+          <section data-background="images/scrum_events.jpg" data-background-size="1000px 900px">
+          </section>
+
+          <section data-background="images/daily_standup.jpg">
+          </section>
+
+          <section data-background="images/SprintBacklog.png" data-background-size="600px 700px" data-background-color="white">
+          </section>
+
+          <section data-background="images/ci_improvement.jpg">
+          </section>
+
+          <section>
+            <h2>How to start?</h2>
+            <h2 class="fragment">One by one</h2>
+          </section>
+
+          <section>
+            <div class="twocolumn">
+              <img src="images/change_cover.jpg" alt="" />
+              <img src="images/linda_rising.jpg" alt="" />
+            </div>
+          </section>
+
+          <section>
+            <h3>Summary</h3>
+            <ul>
+              <li class="fragment">Scrum is simple, hard to implement</li>
+              <li class="fragment">Scrum does not solve problems, makes them visible</li>
+              <li class="fragment">Implementation depends on context</li>
+            </ul>
+          </section>
+
+        </section>
+
+        <section>
+          <section>
+            <h2>Scrum patterns</h2>
+          </section>
+
+          <section>
+            <blockquote>
+              A pattern is a repeatably applicable solution to a problem that arises in a specific context
+            </blockquote>
+            <small>  -  Christopher Alexander</small>
+          </section>
+
+          <section>
+            <p class="fragment">Each scrum component is a pattern</p>
+            <p class="fragment">Each pattern has pre-conditions</p>
+            <p class="fragment">Each pattern has expectations</p>
+            <p class="fragment">Each pattern is extensible</p>
+            <p class="fragment">This is my short list...</p>
+          </section>
+
+          <section data-background="images/jfk_vision.jpg" data-background-size="1200px 700px">
+            <h2>The vision</h2>
+          </section>
+
+          <section data-background-color="#869fa7">
+            Vision <span class="fragment"> = Desired future</span>
+            <p class="fragment">Examples</p>
+          </section>
+
+          <section>
+            <blockquote>
+              make natural, delicious food and drink that helps people live well and die old
+            </blockquote>
+            <small>  -  Apron</small>
+          </section>
+
+          <section>
+            <blockquote>
+              to enable you to organize and prioritize your projects in a fun, flexible, and rewarding way
+            </blockquote>
+            <small>  -  Trello</small>
+          </section>
+
+          <section>
+            <p>A vision should be</p>
+            <ul>
+              <li class="fragment">unambiguous</li>
+              <li class="fragment">clear</li>
+              <li class="fragment">shared</li>
+              <li class="fragment">short</li>
+            </ul>
+            <p class="fragment"><strong>Product owner owns the Vision</strong></p>
+          </section>
+
+          <section>
+            <h3>Definition of done</h3>
+          </section>
+
+          <section data-background-video="resources/fixin_bulb.mp4" type="video/mp4">
+          </section>
+
+          <section>
+            <p>Each team member may have a different understanding of "work completed"</p>
+          </section>
+
+          <section>
+            <p class="fragment">Done is define by PO and Team collectively</p>
+            <p class="fragment">Done should be objective and testable</p>
+            <p class="fragment">Done should target product value, wasted effort should be avoided</p>
+          </section>
+
+          <section>
+            <h4>Good practices</h4>
+            <ul>
+              <li class="fragment">Done is refined every sprint</li>
+              <li class="fragment">Done implies a potentially shippable product</li>
+              <li class="fragment">Done should be understood by end users</li>
+              <li class="fragment">Done must be verified by PO</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Product owner</h3>
+          </section>
+
+          <section data-background="images/po.jpg">
+          </section>
+
+          <section>
+            <blockquote>
+              Get a Product Owner to take responsibility for the vision of the product,
+              and for the value that emanates from the delivery of that vision
+            </blockquote>
+          </section>
+
+          <section>
+            <h4>A product owner</h4>
+            <ul>
+              <li class="fragment">owns their products</li>
+              <li class="fragment">becomes a single point of contact</li>
+              <li class="fragment">is accountable for the results</li>
+            </ul>
+          </section>
+
+          <section>
+            <h4>Product owner traits</h4>
+            <ul>
+              <li class="fragment">Knows when to say 'no'</li>
+              <li class="fragment">Knows how to isolates contexts</li>
+              <li class="fragment">Knows finances/budgets</li>
+              <li class="fragment">Learns continuously</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Development team</h3>
+          </section>
+
+          <section data-background="images/a_team.jpg">
+          </section>
+
+
+          <section>
+            <h4>A development team</h4>
+            <ul>
+              <li class="fragment">is stable</li>
+              <li class="fragment">is autonomous</li>
+              <li class="fragment">is cross-functional</li>
+            </ul>
+          </section>
+
+          <section>
+            <h4>Development team traits</h4>
+            <ul>
+              <li class="fragment">Know how and whom to ask</li>
+              <li class="fragment">Know what they need to learn</li>
+              <li class="fragment">Embrace change</li>
+              <li class="fragment">Improve continuously</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Scrum master</h3>
+          </section>
+
+          <section data-background="images/scrum_master.png">
+          </section>
+
+          <section>
+            <h4>A scrum master</h4>
+            <ul>
+              <li class="fragment">Guides the process for the team</li>
+              <li class="fragment">Defends Scrum and its values</li>
+              <li class="fragment">Removes impediments for the team</li>
+            </ul>
+          </section>
+
+          <section>
+            <h4>Scrum master traits</h4>
+            <ul>
+              <li class="fragment">Discipline</li>
+              <li class="fragment">Responsibility</li>
+              <li class="fragment">Understands business context</li>
+            </ul>
+          </section>
+
+
+          <section>
+            <h3>Sprint</h3>
+          </section>
+
+          <section data-background="images/sprint.png">
+          </section>
+
+          <section>
+            <h4>Time-boxed development interval</h4>
+            <p class="fragment">Recurring</p>
+            <p class="fragment">Frequent</p>
+            <p class="fragment">Fixed-length</p>
+          </section>
+
+          <section>
+            <h4>Goals</h4>
+            <ul>
+              <li class="fragment">Short feedback loop</li>
+              <li class="fragment">Reduce rework</li>
+              <li class="fragment">Accomplish the sprint goal</li>
+              <li class="fragment">Generate regular product increment</li>
+            </ul>
+          </section>
+
+
+          <section>
+            <h3>Sprint planning</h3>
+          </section>
+
+          <section data-background="images/trello_board.png">
+          </section>
+
+          <section>
+            <p class="fragment">A sprint should produce Regular Product increment,</p>
+            <p class="fragment">the team meets to plan how to create it during the sprint,</p>
+            <p class="fragment">and to define a goal</p>
+          </section>
+
+          <section>
+            <h4>Goals</h4>
+            <ul>
+              <li class="fragment">Inspect valuable work and adapt plan</li>
+              <li class="fragment">Collect lagging indicators</li>
+              <li class="fragment">Ability to explain how to reach sprint goal</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Daily scrum</h3>
+          </section>
+
+          <section data-background="images/daily_standup.jpg">
+          </section>
+
+          <section>
+            <p>A short meeting to re-plan the sprint, to let people know about
+              blocking problems that affect the chances to complete the sprint goal
+            </p>
+          </section>
+
+          <section>
+            <h4>Daily scrums should be</h4>
+            <ul>
+              <li class="fragment">Short</li>
+              <li class="fragment">Focused on the problems or impediments</li>
+              <li class="fragment">Re-plan the actions if needed</li>
+            </ul>
+          </section>
+
+          <section>
+            <h4>Benefits</h4>
+            <ul>
+              <li class="fragment">Reduces wated time</li>
+              <li class="fragment">Reinforces shared vision</li>
+              <li class="fragment">Promotes collaboration and knowledge sharing</li>
+              <li class="fragment">Provides insight on unknowns unknowns</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Sprint review</h3>
+          </section>
+
+          <section data-background="images/sprint_review.jpg">
+          </section>
+
+          <section>
+            <p>Event to asses the status of the product and learn about end user needs,
+              opportunities and problems
+            </p>
+          </section>
+
+          <section>
+            <h4>Sprint reviews should have</h4>
+            <ul>
+              <li class="fragment">presence of Team, PO and stakeholders</li>
+              <li class="fragment">the product standing on its own</li>
+              <li class="fragment">backlog items evaluated by PO following Done-definition</li>
+              <li class="fragment">assesment of the sprint goal</li>
+            </ul>
+          </section>
+
+          <section>
+            <h4>Benefits</h4>
+            <ul>
+              <li class="fragment">PO learns about product status and possible shipment</li>
+              <li class="fragment">Team learns gow well they met stakeholder expectations</li>
+              <li class="fragment">A chance to acknowledge what we've done</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Sprint retrospective</h3>
+          </section>
+
+          <section data-background="images/retrospective.jpeg">
+          </section>
+
+          <section>
+            <blockquote>
+              Even the most gifted ones tend to fall into oblivion, a constant review of where we are and what have we
+              done lightens the path for our destiny
+            </blockquote>
+            <small class="fragment">  -  Albus Percival Wulfric Brian Dumbledore</small>
+          </section>
+
+          <section>
+            <p>An event where the Team asses how it did its work during the Sprint</p>
+          </section>
+
+          <section>
+            <ul>
+              <li class="fragment">What did we do well?</li>
+              <li class="fragment">What should we do better?</li>
+              <li class="fragment">What have we failed to do?</li>
+            </ul>
+          </section>
+
+          <section>
+            <h4>Remarks</h4>
+            <p class="fragment">There's always room for improvement</p>
+            <p class="fragment">Is not always directly related to the product</p>
+            <p class="fragment">Is always related to increase the value</p>
+            <p class="fragment">It's a macro daily scrum</p>
+          </section>
+
+        </section>
+
+        <section>
+          <section>
+            <h2>Techniques</h2>
+          </section>
+
+          <section>
+            <h3>Across projects</h3>
+            <ul class="fragment">
+              <li>Customer availability</li>
+              <li>Visible feedback</li>
+              <li>Autonomous teams</li>
+              <li>Automated testing</li>
+              <li>Continuous integration</li>
+              <li>Code reviews</li>
+            </ul>
+          </section>
+
+        </section>
+
+        <section>
+          <h1>Thank you!!</h1>
+        </section>
+
+      </section>
+
+    </div>
+  </div>
+
+  <script src="./reveal.js/lib/js/head.min.js"></script>
+  <script src="./reveal.js/js/reveal.js"></script>
+
+  <script>
+    // More info about config & dependencies:
+// - https://github.com/hakimel/reveal.js#configuration
+// - https://github.com/hakimel/reveal.js#dependencies
+Reveal.initialize({
+  controls: true,
+  progress: true,
+  history: true,
+  center: true,
+  transition: 'fade', // none/fade/slide/convex/concave/zoom
+  dependencies: [
+    { src: './reveal.js/plugin/markdown/marked.js' },
+    { src: './reveal.js/plugin/markdown/markdown.js' },
+    { src: './reveal.js/plugin/notes/notes.js', async: true },
+    { src: './reveal.js/plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+  ]
+});
+  </script>
+</body>
+
+</html>
